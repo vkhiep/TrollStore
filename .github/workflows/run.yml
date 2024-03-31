@@ -15,7 +15,7 @@ on:
         type: string
       sdk_ver:
         description: "iPhoneOS SDK version"
-        default: "16.5"
+        default: "16.4"
         required: true
         type: string
       deb_name:
