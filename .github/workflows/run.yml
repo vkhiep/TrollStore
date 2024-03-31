@@ -65,7 +65,7 @@ jobs:
           export THEOS=${{ github.workspace }}/theos >> ~/.profile
           make -C ./Pwnify
           sudo rm /usr/local/bin/pwnify 2>/dev/null || true
-          sudo cp ./Pwnify /usr/local/bin/pwnify
+          sudo cp ./Pwnify/pwnify /usr/local/bin/pwnify
           make
 
       - name: Upload a Build Artifact
