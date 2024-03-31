@@ -205,7 +205,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 			failMessage = @"This app was not able to launch because it has a \"User\" registration state, register it as \"System\" and try again.";
 		}
 
-		NSString* failTitle = [NSString stringWithFormat:@"Failed to open %@", appId];
+		NSString* failTitle = [NSString stringWithFormat:@"Không mở được %@", appId];
 		UIAlertController* didFailController = [UIAlertController alertControllerWithTitle:failTitle message:failMessage preferredStyle:UIAlertControllerStyleAlert];
 		UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil];
 
@@ -217,8 +217,8 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 		int ret = [appsManager enableJITForBundleID:appId];
 		if (ret != 0)
 		{
-			UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Error" message:[NSString stringWithFormat:@"Error enabling JIT: trollstorehelper returned %d", ret] preferredStyle:UIAlertControllerStyleAlert];
-			UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
+			UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Lỗi" message:[NSString stringWithFormat:@"Lỗi kích hoạt JIT: trollstorehelper returned %d", ret] preferredStyle:UIAlertControllerStyleAlert];
+			UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault handler:nil];
 			[errorAlert addAction:closeAction];
 			[TSPresentationDelegate presentViewController:errorAlert animated:YES completion:nil];
 		}
@@ -246,7 +246,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 			}
 			else
 			{
-				UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Parse Error %ld", error.code] message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+				UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Lỗi phân tích cú pháp %ld", error.code] message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
 				UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault handler:nil];
 				[errorAlert addAction:closeAction];
 
@@ -313,7 +313,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 	NSString* appId = [appInfo bundleIdentifier];
 	NSString* appName = [appInfo displayName];
 
-	UIAlertController* confirmAlert = [UIAlertController alertControllerWithTitle:@"Confirm Uninstallation" message:[NSString stringWithFormat:@"Uninstalling the app '%@' will delete the app and all data associated to it.", appName] preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController* confirmAlert = [UIAlertController alertControllerWithTitle:@"Xác nhận gỡ cài đặt" message:[NSString stringWithFormat:@"Gỡ cài đặt ứng dụng '%@' sẽ xóa ứng dụng và tất cả dữ liệu liên quan đến nó.", appName] preferredStyle:UIAlertControllerStyleAlert];
 
 	UIAlertAction* uninstallAction = [UIAlertAction actionWithTitle:@"Gỡ cài đặt" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
 	{
