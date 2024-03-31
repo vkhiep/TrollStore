@@ -142,7 +142,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 				textField.placeholder = @"URL";
 			}];
 
-			UIAlertAction* installAction = [UIAlertAction actionWithTitle:@"Install" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
+			UIAlertAction* installAction = [UIAlertAction actionWithTitle:@"Cài đặt" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
 			{
 				NSString* URLString = installURLController.textFields.firstObject.text;
 				NSURL* remoteURL = [NSURL URLWithString:URLString];
@@ -207,7 +207,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 		NSString* failTitle = [NSString stringWithFormat:@"Failed to open %@", appId];
 		UIAlertController* didFailController = [UIAlertController alertControllerWithTitle:failTitle message:failMessage preferredStyle:UIAlertControllerStyleAlert];
-		UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+		UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil];
 
 		[didFailController addAction:cancelAction];
 		[TSPresentationDelegate presentViewController:didFailController animated:YES completion:nil];
@@ -239,7 +239,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 				detailsAlert.attributedTitle = [appInfo detailedInfoTitle];
 				detailsAlert.attributedMessage = [appInfo detailedInfoDescription];
 
-				UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
+				UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault handler:nil];
 				[detailsAlert addAction:closeAction];
 
 				[TSPresentationDelegate presentViewController:detailsAlert animated:YES completion:nil];
@@ -247,7 +247,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 			else
 			{
 				UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Parse Error %ld", error.code] message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-				UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
+				UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault handler:nil];
 				[errorAlert addAction:closeAction];
 
 				[TSPresentationDelegate presentViewController:errorAlert animated:YES completion:nil];
@@ -273,7 +273,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 		[confirmationAlert addAction:switchToUserAction];
 
-		UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+		UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil];
 
 		[confirmationAlert addAction:cancelAction];
 
@@ -295,7 +295,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 		[infoAlert addAction:respringAction];
 
-		UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
+		UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Đóng" style:UIAlertActionStyleDefault handler:nil];
 
 		[infoAlert addAction:closeAction];
 
@@ -315,7 +315,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 	UIAlertController* confirmAlert = [UIAlertController alertControllerWithTitle:@"Confirm Uninstallation" message:[NSString stringWithFormat:@"Uninstalling the app '%@' will delete the app and all data associated to it.", appName] preferredStyle:UIAlertControllerStyleAlert];
 
-	UIAlertAction* uninstallAction = [UIAlertAction actionWithTitle:@"Uninstall" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
+	UIAlertAction* uninstallAction = [UIAlertAction actionWithTitle:@"Gỡ cài đặt" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
 	{
 		if(appId)
 		{
@@ -328,7 +328,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 	}];
 	[confirmAlert addAction:uninstallAction];
 
-	UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+	UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:nil];
 	[confirmAlert addAction:cancelAction];
 
 	[TSPresentationDelegate presentViewController:confirmAlert animated:YES completion:nil];
@@ -438,7 +438,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 	UIAlertController* appSelectAlert = [UIAlertController alertControllerWithTitle:appName?:@"" message:appId?:@"" preferredStyle:UIAlertControllerStyleActionSheet];
 
-	UIAlertAction* openAction = [UIAlertAction actionWithTitle:@"Open" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
+	UIAlertAction* openAction = [UIAlertAction actionWithTitle:@"Mở" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
 	{
 		[self openAppPressedForRowAtIndexPath:indexPath enableJIT:NO];
 		[self deselectRow];
@@ -447,7 +447,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 	if ([appInfo isDebuggable])
 	{
-		UIAlertAction* openWithJITAction = [UIAlertAction actionWithTitle:@"Open with JIT" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
+		UIAlertAction* openWithJITAction = [UIAlertAction actionWithTitle:@"Mở với JIT" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
 		{
 			[self openAppPressedForRowAtIndexPath:indexPath enableJIT:YES];
 			[self deselectRow];
@@ -455,7 +455,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 		[appSelectAlert addAction:openWithJITAction];
 	}
 
-	UIAlertAction* showDetailsAction = [UIAlertAction actionWithTitle:@"Show Details" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
+	UIAlertAction* showDetailsAction = [UIAlertAction actionWithTitle:@"Hiển thị chi tiết" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action)
 	{
 		[self showDetailsPressedForRowAtIndexPath:indexPath];
 		[self deselectRow];
@@ -483,14 +483,14 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 	}];
 	[appSelectAlert addAction:switchRegistrationAction];
 
-	UIAlertAction* uninstallAction = [UIAlertAction actionWithTitle:@"Uninstall App" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
+	UIAlertAction* uninstallAction = [UIAlertAction actionWithTitle:@"Gỡ cài đặt ứng dụng" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
 	{
 		[self uninstallPressedForRowAtIndexPath:indexPath];
 		[self deselectRow];
 	}];
 	[appSelectAlert addAction:uninstallAction];
 
-	UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action)
+	UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Huỷ" style:UIAlertActionStyleCancel handler:^(UIAlertAction* action)
 	{
 		[self deselectRow];
 	}];
