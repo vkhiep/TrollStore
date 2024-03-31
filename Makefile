@@ -1,6 +1,6 @@
 TOPTARGETS := all clean update
 
-$(TOPTARGETS): pre_build make_fastPathSign make_roothelper make_trollstore make_pwnify make_trollhelper_embedded make_trollhelper_package assemble_trollstore build_installer15 build_installer64e
+$(TOPTARGETS): pre_build make_fastPathSign make_roothelper make_trollstore make_Pwnify make_trollhelper_embedded make_trollhelper_package assemble_trollstore build_installer15 build_installer64e
 
 pre_build:
 	@rm -rf ./_build 2>/dev/null || true
@@ -15,8 +15,8 @@ make_roothelper:
 make_trollstore:
 	@$(MAKE) -C ./TrollStore FINALPACKAGE=1 $(MAKECMDGOALS)
 
-make_pwnify:
-	@$(MAKE) -C ./pwnify $(MAKECMDGOALS)
+make_Pwnify:
+	@$(MAKE) -C ./Pwnify $(MAKECMDGOALS)
 
 ifneq ($(MAKECMDGOALS),clean)
 
