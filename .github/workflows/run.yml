@@ -64,6 +64,7 @@ jobs:
       - name: Build Package 
         run: |
           cd ${{ github.workspace }}
+          export THEOS=${{ github.workspace }}/theos
           make
 
       - name: Upload a Build Artifact
