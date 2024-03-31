@@ -1,4 +1,4 @@
-name: Build the DEB
+name: Build
 
 on:
   workflow_dispatch:
@@ -63,8 +63,7 @@ jobs:
           
       - name: Build Package 
         run: |
-          gmake clean package FINALPACKAGE=1
-          gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          gmake
 
       - name: Upload a Build Artifact
         if: ${{ inputs.upload_artifact }}
