@@ -262,10 +262,10 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 
 	if([newState isEqualToString:@"User"])
 	{
-		NSString* title = [NSString stringWithFormat:@"Switching '%@' to \"User\" Registration", [appInfo displayName]];
+		NSString* title = [NSString stringWithFormat:@"Chuyển '%@' sang \"User\" Registration", [appInfo displayName]];
 		UIAlertController* confirmationAlert = [UIAlertController alertControllerWithTitle:title message:@"Switching this app to a \"User\" registration will make it unlaunchable after the next respring because the bugs exploited in TrollStore only affect apps registered as \"System\".\nThe purpose of this option is to make the app temporarily show up in settings, so you can adjust the settings and then switch it back to a \"System\" registration (TrollStore installed apps do not show up in settings otherwise). Additionally, the \"User\" registration state is also useful to temporarily fix iTunes file sharing, which also doesn't work for TrollStore installed apps otherwise.\nWhen you're done making the changes you need and want the app to become launchable again, you will need to switch it back to \"System\" state in TrollStore." preferredStyle:UIAlertControllerStyleAlert];
 
-		UIAlertAction* switchToUserAction = [UIAlertAction actionWithTitle:@"Switch to \"User\"" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
+		UIAlertAction* switchToUserAction = [UIAlertAction actionWithTitle:@"Chuyển sang \"User\"" style:UIAlertActionStyleDestructive handler:^(UIAlertAction* action)
 		{
 			[[TSApplicationsManager sharedInstance] changeAppRegistration:[appInfo bundlePath] toState:newState];
 			[appInfo sync_loadBasicInfo];
@@ -284,7 +284,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 		[[TSApplicationsManager sharedInstance] changeAppRegistration:[appInfo bundlePath] toState:newState];
 		[appInfo sync_loadBasicInfo];
 
-		NSString* title = [NSString stringWithFormat:@"Switched '%@' to \"System\" Registration", [appInfo displayName]];
+		NSString* title = [NSString stringWithFormat:@"Chuyển '%@' sang \"System\" Registration", [appInfo displayName]];
 
 		UIAlertController* infoAlert = [UIAlertController alertControllerWithTitle:title message:@"The app has been switched to the \"System\" registration state and will become launchable again after a respring." preferredStyle:UIAlertControllerStyleAlert];
 
@@ -476,7 +476,7 @@ UIImage* imageWithSize(UIImage* image, CGSize size)
 		switchActionStyle = UIAlertActionStyleDefault;
 	}
 
-	UIAlertAction* switchRegistrationAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Switch to \"%@\" Registration", switchState] style:switchActionStyle handler:^(UIAlertAction* action)
+	UIAlertAction* switchRegistrationAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Chuyển sang đăng ký \"%@\"", switchState] style:switchActionStyle handler:^(UIAlertAction* action)
 	{
 		[self changeAppRegistrationForRowAtIndexPath:indexPath toState:switchState];
 		[self deselectRow];
