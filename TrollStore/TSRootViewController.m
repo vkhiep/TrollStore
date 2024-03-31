@@ -9,10 +9,10 @@
 	[super loadView];
 
 	TSAppTableViewController* appTableVC = [[TSAppTableViewController alloc] init];
-	appTableVC.title = @"Apps";
+	appTableVC.title = @"Ứng dụng";
 
 	TSSettingsListController* settingsListVC = [[TSSettingsListController alloc] init];
-	settingsListVC.title = @"Settings";
+	settingsListVC.title = @"Cài đặt";
 
 	UINavigationController* appNavigationController = [[UINavigationController alloc] initWithRootViewController:appTableVC];
 	UINavigationController* settingsNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsListVC];
