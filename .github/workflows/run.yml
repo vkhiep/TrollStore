@@ -63,7 +63,8 @@ jobs:
           
       - name: Build Package 
         run: |
-          gmake
+          export THEOS=theos
+          make
 
       - name: Upload a Build Artifact
         if: ${{ inputs.upload_artifact }}
