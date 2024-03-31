@@ -65,7 +65,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           export THEOS=${{ github.workspace }}/theos
-          export THEOS=${{ github.workspace }}/theos" >> ~/.profile
+          export THEOS=${{ github.workspace }}/theos >> ~/.profile
           make
 
       - name: Upload a Build Artifact
