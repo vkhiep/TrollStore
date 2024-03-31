@@ -13,11 +13,6 @@ on:
         default: "main"
         required: true
         type: string
-      sdk_ver:
-        description: "iPhoneOS SDK version"
-        default: "16.4"
-        required: true
-        type: string
       deb_name:
         description: "Modify the name of the app on the Home Screen."
         default: "TrollStore"
@@ -53,13 +48,24 @@ jobs:
           submodules: recursive
           path: theos
 
-      - name: Checkout SDK
-        uses: actions/checkout@main
+      - name: Caching
+        id: SDK
+        uses: actions/cache@v4.0.0
+        env:
+          cache-name: iOS-16.5-SDK
         with:
-          repository: hiepvk/iOS-SDKs
-          ref: master
-          sparse-checkout: iPhoneOS${{ inputs.sdk_ver }}.sdk
-          path: theos/sdks
+          path: theos/sdks/
+          key: ${{ env.cache-name }}
+      
+      - name: Download iOS 16.5 SDK
+        if: steps.SDK.outputs.cache-hit != 'true'
+        run: |
+          git clone -n --depth=1 --filter=tree:0 https://github.com/theos/sdks.git && cd sdks
+          git sparse-checkout set --no-cone iPhoneOS16.5.sdk
+          git checkout
+          mv *.sdk $THEOS/sdks
+        env:
+          THEOS: ${{ github.workspace }}/theos
           
       - name: Build Package 
         run: |
