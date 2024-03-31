@@ -1,0 +1,85 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_github:
+        description: "Repository github: example: user/repository"
+        default: "vkhiep/TrollStore"
+        required: true
+        type: string
+      ref_github:
+        description: "Ref repository github: example: main, master, v.v"
+        default: "main"
+        required: true
+        type: string
+      sub_repo:
+        description: "Sub repository github: example: user/repository"
+        default: "PoomSmart/YouTubeHeader"
+        required: false
+        type: string
+      sub_ref:
+        description: "Sub ref repository github: example: main, master, v.v"
+        default: "main"
+        required: false
+        type: string
+      sdk_ver:
+        description: "iPhoneOS SDK version"
+        default: "16.5"
+        required: true
+        type: string
+      deb_name:
+        description: "Modify the name of the app on the Home Screen."
+        default: "TrollStore"
+        required: true
+        type: string
+      upload_artifact:
+        description: "Upload Artifact"
+        default: true
+        required: false
+        type: boolean
+    
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@main
+        with:
+          repository: ${{ inputs.repo_github }}
+          ref: ${{ inputs.ref_github }}
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: brew install ldid dpkg make
+
+      - name: Set PATH environment variable
+        run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
+        
+      - name: Checkout theos/theos
+        uses: actions/checkout@main
+        with:
+          repository: theos/theos
+          ref: master
+          submodules: recursive
+          path: theos
+
+      - name: Checkout SDK
+        uses: actions/checkout@main
+        with:
+          repository: hiepvk/iOS-SDKs
+          ref: master
+          sparse-checkout: iPhoneOS${{ inputs.sdk_ver }}.sdk
+          path: theos/sdks
+          
+      - name: Build Package 
+        run: |
+          export THEOS=theos
+          gmake clean package FINALPACKAGE=1
+          gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+
+      - name: Upload a Build Artifact
+        if: ${{ inputs.upload_artifact }}
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: ${{ inputs.deb_name }}
+          path: packages/*.*
