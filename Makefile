@@ -50,7 +50,7 @@ build_installer15:
 	@cp ./_build/PersistenceHelper_Embedded_Legacy_arm64 ./_build/TrollStorePersistenceHelperToInject
 	@$(MAKE) -C ./Pwnify
 	@sudo rm /usr/local/bin/pwnify 2>/dev/null || true
-	@sudo cp ./pwnify /usr/local/bin/pwnify
+	@sudo cp ./Pwnify /usr/local/bin/pwnify
 	@pwnify set-cpusubtype ./_build/TrollStorePersistenceHelperToInject 1
 	@ldid -s -K./Victim/victim.p12 ./_build/TrollStorePersistenceHelperToInject
 	APP_PATH=$$(find ./_build/tmp15/Payload -name "*" -depth 1) ; \
