@@ -1,4 +1,4 @@
-name: Build
+name: Build the DEB
 
 on:
   workflow_dispatch:
@@ -12,16 +12,6 @@ on:
         description: "Ref repository github: example: main, master, v.v"
         default: "main"
         required: true
-        type: string
-      sub_repo:
-        description: "Sub repository github: example: user/repository"
-        default: "PoomSmart/YouTubeHeader"
-        required: false
-        type: string
-      sub_ref:
-        description: "Sub ref repository github: example: main, master, v.v"
-        default: "main"
-        required: false
         type: string
       sdk_ver:
         description: "iPhoneOS SDK version"
@@ -50,7 +40,7 @@ jobs:
           submodules: recursive
 
       - name: Install Dependencies
-        run: brew install ldid dpkg make
+        run: brew install ldid dpkg make libarchive
 
       - name: Set PATH environment variable
         run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
